@@ -75,6 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 0) {
               // Find If it is a device name, it has lowest Rssi value and has never been registered in scanResultList, it is added to the list
               if (lowestRssi > element.rssi) {
+                scanResultList.clear();
                 lowestRssi = element.rssi;
                 scanResultList.add(element);
               }
