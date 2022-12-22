@@ -53,6 +53,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Scan start/stop functions
   */
   scan() async {
+    //Declare variable for initial rssi
+    int lowestRssi = 1000;
+
     if (!_isScanning) {
       // If it is not being scanned,
       // delete the previously scanned list
@@ -70,8 +73,11 @@ class _MyHomePageState extends State<MyHomePage> {
             if (scanResultList
                     .indexWhere((e) => e.device.id == element.device.id) <
                 0) {
-              // Find If it is a device name and has never been registered in scanResultList, it is added to the list
-              scanResultList.add(element);
+              // Find If it is a device name, it has lowest Rssi value and has never been registered in scanResultList, it is added to the list
+              if (lowestRssi > element.rssi) {
+                lowestRssi = element.rssi;
+                scanResultList.add(element);
+              }
             }
           }
         });
